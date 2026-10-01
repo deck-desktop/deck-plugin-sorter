@@ -1,0 +1,8 @@
+{
+  "id": "sorter",
+  "name": "Sorter",
+  "description": "Files new downloads into folders by type.",
+  "icon": "FolderInput",
+  "version": "1.0.0",
+  "minDeck": "0.7.0"
+}
