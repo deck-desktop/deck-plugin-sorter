@@ -15,7 +15,8 @@ import { readConfig, writeConfig, readLog, runSort, startSweep } from "./io";
 
 // Started at module scope, not in the component: Deck unmounts a module when you navigate away,
 // and auto-sort has to keep working while you are elsewhere.
-startSweep();
+/** Called by Deck before a reload re-imports this plugin, so the old copy's sweep stops. */
+export const dispose = startSweep();
 
 /** Group log entries into a short human line: "12 recent • Images, Videos". */
 function logSummary(log: MovedEntry[]): string {

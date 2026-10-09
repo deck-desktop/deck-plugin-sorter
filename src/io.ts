@@ -64,13 +64,14 @@ export async function runSort(cfg: SortConfig): Promise<MovedEntry[]> {
  * by that much. Irrelevant for sorting downloads; the upgrade if it ever matters is a Rust timer
  * that emits an event.
  */
-export function startSweep(): void {
+export function startSweep(): () => void {
   let lastRun = 0;
-  setInterval(async () => {
+  const id = setInterval(async () => {
     const cfg = await readConfig();
     if (!cfg.enabled) return;
     if (Date.now() - lastRun < Math.max(1, cfg.intervalMin) * 60_000) return;
     lastRun = Date.now();
     try { await runSort(cfg); } catch { /* a failed run must not stop later ones */ }
   }, 30_000);
+  return () => clearInterval(id);
 }
