@@ -11,7 +11,7 @@ export interface SortRule {
 }
 
 export interface SortConfig {
-  /** Target folder, vault-relative. "" means the user's Downloads. */
+  /** Target folder, an absolute path. "" means the user's Downloads. */
   dir: string;
   /** Whether the background sweep runs at all. */
   enabled: boolean;

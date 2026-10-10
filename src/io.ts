@@ -6,9 +6,7 @@
 import { configRead, configWrite, fsHomeDir, fsList, fsMove } from "../shim/bridge.js";
 import { plan, DEFAULT_CONFIG, type Entry, type MovedEntry, type SortConfig } from "./sort";
 
-// This plugin's own config, under the "plugin-" prefix config.rs keeps device-local — a Windows
-// disk path and a list of this machine's filenames mean nothing on the phone, and syncing them
-// would be a small privacy leak for no gain.
+// This plugin's own configs, under the "plugin-" prefix, in Deck's config dir on this machine.
 const CFG_KEY = "plugin-sorter";
 const LOG_KEY = "plugin-sorter-log";
 
