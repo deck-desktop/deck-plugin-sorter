@@ -3,6 +3,7 @@
   "name": "Sorter",
   "description": "Files new downloads into folders by type.",
   "icon": "FolderInput",
-  "version": "1.0.0",
+  "color": "#fdba74",
+  "version": "1.0.1",
   "minDeck": "0.7.0"
 }
