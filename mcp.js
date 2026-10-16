@@ -1,9 +1,9 @@
-// plugins/sorter/src/mcp.ts
+// src/mcp.ts
 import { readdirSync, statSync, renameSync, mkdirSync, existsSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-// plugins/sorter/src/sort.ts
+// src/sort.ts
 var SKIP_EXT = ["crdownload", "part", "tmp", "download", "!ut"];
 var MIN_AGE_MS = 12e4;
 function extOf(name) {
@@ -43,7 +43,7 @@ var DEFAULT_CONFIG = {
   ]
 };
 
-// plugins/sorter/src/mcp.ts
+// src/mcp.ts
 var CFG_KEY = "plugin-sorter";
 var LOG_KEY = "plugin-sorter-log";
 var targetDir = (cfg) => cfg.dir.trim() || join(homedir(), "Downloads");
