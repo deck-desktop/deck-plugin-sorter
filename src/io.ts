@@ -69,7 +69,7 @@ export function startSweep(): () => void {
     if (!cfg.enabled) return;
     if (Date.now() - lastRun < Math.max(1, cfg.intervalMin) * 60_000) return;
     lastRun = Date.now();
-    try { await runSort(cfg); } catch { /* a failed run must not stop later ones */ }
+    try { await runSort(cfg); } catch (e) { /* a failed run must not stop later ones */ console.warn("[sorter] sort run failed", e); }
   }, 30_000);
   return () => clearInterval(id);
 }

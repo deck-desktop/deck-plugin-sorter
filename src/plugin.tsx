@@ -79,9 +79,9 @@ export default function Sorter() {
   const [busy, setBusy] = useState(false);
   const [flash, setFlash] = useState("");
 
-  const loadLog = () => { void readLog().then(setLog).catch(() => {}); };
+  const loadLog = () => { void readLog().then(setLog).catch((e) => console.warn("[sorter] log load failed", e)); };
   useEffect(() => {
-    void readConfig().then(setCfg).catch(() => {});
+    void readConfig().then(setCfg).catch((e) => console.warn("[sorter] config load failed", e));
     loadLog();
   }, []);
 
@@ -90,7 +90,7 @@ export default function Sorter() {
     setCfg((c) => {
       if (!c) return c;
       const next = { ...c, ...patch };
-      writeConfig(next).catch(() => {});
+      writeConfig(next).catch((e) => console.warn("[sorter] config save failed", e));
       return next;
     });
   };
