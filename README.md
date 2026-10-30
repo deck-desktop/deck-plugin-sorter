@@ -1,30 +1,31 @@
-# Sorter
+# Sorter for Deck
 
-Files new downloads into folders by type.
+Moves loose files in your Downloads folder (or any folder you choose) into category folders by
+file extension. Open it from the **+** beside your tabs and choose **Sorter**.
 
-Watches the downloads folder and moves things into folders by extension, on rules you set. A file
-is left alone until it has stopped changing, so a part-downloaded file is never moved out from
-under the browser writing it.
+![Sorter](docs/screenshot.png)
 
-Sorting is previewed before it runs: the plan is a list you can look at, not something that
-happens and is then explained.
+- **Sort now** sorts the folder once and says how many files moved.
+- **Auto-sort in background** sorts it again every N minutes while Deck is running. It is off
+  until you turn it on.
+- **Rules**: each category is a folder name and the extensions that go in it. It starts with
+  Images, Videos, Audio, Installers, Archives and Documents; add, rename or remove categories
+  and their extensions.
+- **Unmatched → Other** moves files whose extension matches no rule into `Other`. Files with no
+  extension at all, such as `README` or `LICENSE`, are always left where they are.
+- **Recent moves**: the last 50 files sorted and the folder each went to.
 
-## What it exports
+Sorter leaves alone anything still downloading (`.crdownload`, `.part`, `.tmp`, `.download`,
+`.!ut`), any file changed in the last two minutes, subfolders, and `desktop.ini`. A file that is
+locked or in use is skipped and tried again on the next run.
 
-| Export | Where it renders |
-|---|---|
-| `default` | the tab: rules, and the plan for the next sweep |
-| `mcp` | running a sweep and reading the rules, for an agent |
+Settings and the list of recent moves are kept in `data\sorter\` in Deck's config folder
+(`plugin-sorter.json` and `plugin-sorter-log.json`).
 
-## Build
+## For agents
 
-```sh
-node plugins/sorter/build.mjs
-```
+The plugin brings two tools to Deck's MCP server:
 
-See [../README.md](../README.md) for how the build and the shims work.
-
-## Install
-
-Copy `plugin.json` and `plugin.js`, `mcp.js` into `%APPDATA%\Deck\plugins\sorter\` (`Deck-Dev` for a
-debug build) and restart Deck.
+- `deck_sort_downloads` sorts the folder with the same rules. `dryRun` lists what would move
+  without moving anything, and `dir` sorts a different folder.
+- `deck_sort_rules` shows the folder, whether auto-sort is on, and every rule.
